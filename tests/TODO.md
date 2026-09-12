@@ -2,3 +2,5 @@
 - Finish debugging main pipeline
 - Check batching logic
 - Add regional grouping logic
+- remove system:index from the properties when reducing
+- 
