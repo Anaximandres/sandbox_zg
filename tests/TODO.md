@@ -3,4 +3,5 @@
 - Check batching logic
 - Add regional grouping logic
 - remove system:index from the properties when reducing
-- 
+- move restructuring of centroid field to server side
+- add hash logic for reduced datasets to efficiently make sets from them

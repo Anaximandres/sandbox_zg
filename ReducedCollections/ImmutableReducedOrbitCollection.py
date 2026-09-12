@@ -157,12 +157,12 @@ class ImmutableReducedOrbitCollection(ImmutableReducedCollection):
                                                             values = variable)
         return result
     
-    def create_properties_df(self) -> pd.DataFrame:
+    def create_properties_df(self, centroid_property_name: str | None) -> pd.DataFrame:
         """
         Creates a dataframe containing all properties of this ReducedOrbitCollection instance.
         """
         frames = [
-            reduced_batch.create_properties_df()
+            reduced_batch.create_properties_df(centroid_property_name)
             for reduced_batch in self._batch_collections
         ]
         if not frames:
@@ -171,7 +171,7 @@ class ImmutableReducedOrbitCollection(ImmutableReducedCollection):
         return pd.concat(frames, ignore_index=True)
 
 
-    def create_dataset(self) -> xr.Dataset:
+    def create_dataset(self, controid_property_name: str | None = 'polygon_centroid') -> xr.Dataset:
         """
         Builds an xarray Dataset from the long-format variable dataframes.
 
@@ -183,12 +183,13 @@ class ImmutableReducedOrbitCollection(ImmutableReducedCollection):
             - one per entry in get_variables(), each with dims (OID, timestamp)
             - 'RO': relative orbit, with dim (timestamp,) only
             - one entry per property in get_properties(), all 1-D (OID)
+        NOTE: The polygon centroid property is split into an x and y variable (that vary with OID)
         """
         variable_dfs = self.create_wide_variable_dfs()
 
         # for one orbit all oid's and timestamps should be identical for each variable
         first_df : pd.DataFrame = variable_dfs[next(iter(variable_dfs))]
-        all_timestamps: list[pd.DatetimeIndex] = sorted(first_df.colums)
+        all_timestamps: list[pd.Timestamp] = sorted(pd.to_datetime(first_df.columns))
         all_oids: list[int | str] = sorted(first_df.index)
 
 
@@ -208,7 +209,7 @@ class ImmutableReducedOrbitCollection(ImmutableReducedCollection):
         data_vars["RO"] = (("timestamp",), np.asarray(ro_values, dtype=int))
     
         # Properties are 1-D per OID; align them onto the same OID grid.
-        properties_df = self.create_properties_df()
+        properties_df = self.create_properties_df(controid_property_name)
         if properties_df.duplicated(subset=self._object_id_name).any():
             raise ValueError(
                 f"Duplicate {self._object_id_name!r} values in properties_df; "

@@ -1,5 +1,6 @@
 import ee
 import pandas as pd
+import ast
 from FeatureManipulation import FeatureCollectionUtils
 from .ImmutableReducedCollection import ImmutableReducedCollection
 
@@ -128,10 +129,20 @@ class ImmutableReducedBatchCollection(ImmutableReducedCollection):
 
         return result
     
-    def create_properties_df(self) -> pd.DataFrame:
+    def create_properties_df(self, centroid_property_name: str | None) -> pd.DataFrame:
         """
         Returns a dataframe containing all properties of this ReducedBatchCollection instance.
         """
         #NOTE possible improvement to allow for using only a subset of the asset properties
         columns = [self._object_id_name, *self._asset_properties]
-        return self._collection[columns].copy()
+        result = self._collection[columns].copy()
+        if centroid_property_name in columns:
+
+            # If values are strings, parse them into dicts first
+            result['polygon_centroid'] = result['polygon_centroid'].apply(ast.literal_eval)
+
+            # Now extract x and y from the 'coordinates' list
+            result['x'] = result['polygon_centroid'].apply(lambda d: d['coordinates'][0])
+            result['y'] = result['polygon_centroid'].apply(lambda d: d['coordinates'][1])
+            result = result.drop(centroid_property_name, axis=1)
+        return result
