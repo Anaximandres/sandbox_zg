@@ -289,7 +289,10 @@ class CSVHandler():
     @staticmethod
     def _read_csv(path) -> pd.DataFrame:
         """ Bundles all csv reading. """
-        return pd.read_csv(path)
+        df = pd.read_csv(path)
+        if 'Unnamed: 0' in df.columns:
+            df = df.rename(columns = {'Unnamed: 0': 'system:index'})
+        return df
     
     @staticmethod
     def _derive_variable_set_from_df(dataframe: pd.DataFrame) -> set[str]:
@@ -375,7 +378,7 @@ class CSVHandler():
             batch_collections.add(batch_collection)
 
         assert relative_orbit_name is not None
-        variables = next(iter(batch_collections)) #first element
+        #variables = next(iter(batch_collections)) #first element
         return ImmutableReducedOrbitCollection(batch_collections,
                                                relative_orbit,
                                                variables,

@@ -1,0 +1,4 @@
+- Finish checking main pipeline
+- Finish debugging main pipeline
+- Check batching logic
+- Add regional grouping logic
