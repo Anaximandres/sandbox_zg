@@ -1,0 +1,30 @@
+{
+    "object_id_name": "id",
+    "mother_collection_id": "3a1834b72cda3452c5e4c5b41f178ed3fe8ef5fe068821267a09c9ac455b6eee",
+    "variables": [
+        "VH_stdDev",
+        "CP_stdDev",
+        "VV_stdDev",
+        "VV_count",
+        "LIA_mean",
+        "VH_mean",
+        "VV_mean",
+        "CP_mean",
+        "AZI_mean"
+    ],
+    "properties": [
+        "Usage",
+        "system:index",
+        "polygon_centroid",
+        "Name"
+    ],
+    "orbits": [
+        37
+    ],
+    "orbit_collection_names": {
+        "37": "S1_RO_37_Pass_DES_Year_2024"
+    },
+    "Orbit_37": [
+        "S1_RO_37_Pass_DES_Year_2024_1of1.csv"
+    ]
+}

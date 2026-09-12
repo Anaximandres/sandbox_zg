@@ -1,0 +1,11 @@
+{
+    "years" : [2025],
+    "field_asset_paths" : 
+    {
+        "2025": "projects/ee-zachariasguislain/assets/LeuvenFields"
+    },
+    "variables": ["VV", "VH", "CP", "azimuth", "lia"],
+    "units": "dB",
+    "output_dir": "tests",
+    "batch_size": 500
+}

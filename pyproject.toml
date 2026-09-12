@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sandbox-zg"
+version = "0.1.0"
+description = "A package for acquiring parcel level aggregated satellite imagery. Based on Manuel Huber's SandboxNL (https://github.com/ManuelHuber-Github/Agricultural-SandboxNL/blob/main/Sentinel%201%20GRD/Mining_S1GRD_Per_Parcel_GEE_Python_API.py)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "earthengine-api",
+  "pandas",
+  "numpy",
+  "xarray"
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+  "config*",
+  "EeImageCollections*",
+  "FeatureManipulation*",
+  "Pipelines*",
+  "read_and_write*",
+  "ReducedCollections*",
+  "utils*"
+]

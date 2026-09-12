@@ -1,0 +1,7 @@
+earthengine-api
+pandas
+numpy
+xarray
+
+[dev]
+pytest>=8

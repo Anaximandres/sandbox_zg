@@ -1,0 +1,44 @@
+{
+    "object_id_name": "id",
+    "mother_collection_id": "3a1834b72cda3452c5e4c5b41f178ed3fe8ef5fe068821267a09c9ac455b6eee",
+    "variables": [
+        "LIA_stdDev",
+        "LIA_mean",
+        "AZI_stdDev",
+        "VV_mean",
+        "AZI_mean",
+        "VH_stdDev",
+        "VH_mean",
+        "VV_stdDev"
+    ],
+    "properties": [
+        "Usage",
+        "system:index",
+        "polygon_centroid",
+        "Name"
+    ],
+    "orbits": [
+        88,
+        37,
+        161,
+        110
+    ],
+    "orbit_collection_names": {
+        "88": "S1_RO_88_Pass_ASC_Year_2024",
+        "37": "S1_RO_37_Pass_DES_Year_2024",
+        "161": "S1_RO_161_Pass_ASC_Year_2024",
+        "110": "S1_RO_110_Pass_DES_Year_2024"
+    },
+    "Orbit_88": [
+        "S1_RO_88_Pass_ASC_Year_2024_1of1.csv"
+    ],
+    "Orbit_37": [
+        "S1_RO_37_Pass_DES_Year_2024_1of1.csv"
+    ],
+    "Orbit_161": [
+        "S1_RO_161_Pass_ASC_Year_2024_1of1.csv"
+    ],
+    "Orbit_110": [
+        "S1_RO_110_Pass_DES_Year_2024_1of1.csv"
+    ]
+}
